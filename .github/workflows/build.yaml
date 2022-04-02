@@ -44,6 +44,7 @@ jobs:
         cd dash
         dashing build tf
         cd ..
+        ls -lah
         tar -zcvf tf.docset.tar tf.docset
 
     - name: Release
