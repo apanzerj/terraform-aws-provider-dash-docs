@@ -1,9 +1,9 @@
-wget https://github.com/hashicorp/terraform-provider-aws/archive/refs/heads/main.zip
-unzip main.zip
+wget https://github.com/hashicorp/terraform-provider-aws/archive/refs/heads/$1.zip
+unzip $1.zip
 
-cp -r terraform-provider-aws-main/website/docs/r ./
-cp -r terraform-provider-aws-main/website/docs/d ./
-cp -r terraform-provider-aws-main/website/docs/index.html.markdown ./
+cp -r terraform-provider-aws-$1/website/docs/r ./
+cp -r terraform-provider-aws-$1/website/docs/d ./
+cp -r terraform-provider-aws-$1/website/docs/index.html.markdown ./
 
 echo "Creating resources.html.markdown"
 cat r/*.markdown > resources.html.markdown
@@ -33,10 +33,10 @@ sed -i'asdf' 's/\/github-markdown-css/github-markdown-css/g' index.html
 rm data_sources.html.markdown
 rm resources.html.markdown
 
-mkdir dash
-mv *.html dash/
-cp dashing.json dash/
-cp -r github-markdown-css dash/
+mkdir dash-$1
+mv *.html dash-$1/
+cp dashing.json dash-$1/
+cp -r github-markdown-css dash-$1/
 
 rm *.*asdf
 echo "Done"
