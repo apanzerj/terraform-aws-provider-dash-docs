@@ -44,6 +44,9 @@ jobs:
         cd dash
         dashing build tf
         tar -zcvf tf.docset.tar ./tf.docset
+    - name: da fuq
+      run: |
+        ls -lah 
 
     - name: Save docset
       uses: actions/upload-artifact@v3
