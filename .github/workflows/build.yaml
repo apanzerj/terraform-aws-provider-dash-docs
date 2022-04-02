@@ -45,8 +45,14 @@ jobs:
         dashing build tf
         tar -zcvf tf.docset.tar ./tf.docset
 
+    - name: Save docset
+      uses: actions/upload-artifact@v3
+      with:
+        name: dash_docset
+        path: ./tf.docset.tar
+
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
         files: tf.docset.tar
-        tag_name: v1
+        tag_name: v2
