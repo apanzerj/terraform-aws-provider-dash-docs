@@ -43,8 +43,7 @@ jobs:
         tar -xvf dash.tar
         cd dash
         dashing build tf
-        ls -lah 
-        tar -zcvf tf.docset.tar tf.docset
+        tar -zcvf tf.docset.tar ./tf.docset
 
     - name: Release
       uses: softprops/action-gh-release@v1
