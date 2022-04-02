@@ -1,0 +1,12 @@
+{
+    "name": "Terraform 1.1.6",
+    "package": "tf",
+    "index": "index.html",
+    "selectors": {
+        "h1": "Resource",
+        "h2": "Section"
+    },
+    "icon32x32": "",
+    "allowJS": true,
+    "ExternalURL": ""
+}
