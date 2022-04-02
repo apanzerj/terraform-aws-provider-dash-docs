@@ -1,0 +1,44 @@
+name: Run
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: 'ubuntu-latest'
+    container: python:3
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Build
+      run: |
+        ./run.sh
+        tar -zcvf dash.tar dash/
+
+    - name: Save HTML
+      uses: actions/upload-artifact@v3
+      with:
+        name: dash
+        path: ./dash.tar
+
+  compile:
+    runs-on: 'ubuntu-latest'
+    container: golang:latest
+    needs: build
+    steps:
+
+    - name: setup
+      run: |
+        go install github.com/technosophos/dashing@latest
+
+    - uses: actions/download-artifact@v3
+      with:
+        name: dash
+
+    - name: compile
+      run: |
+        tar -xvf dash.tar
+        cd dash
+        dashing build tf
