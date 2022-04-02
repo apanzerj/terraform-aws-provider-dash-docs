@@ -44,18 +44,9 @@ jobs:
         cd dash
         dashing build tf
         tar -zcvf tf.docset.tar ./tf.docset
-    - name: da fuq
-      run: |
-        ls -lah 
-
-    - name: Save docset
-      uses: actions/upload-artifact@v3
-      with:
-        name: dash_docset
-        path: ./dash/tf.docset.tar
 
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
         files: ./dash/tf.docset.tar
-        tag_name: v3
+        tag_name: ${{ github.event.release.tag_name }}
