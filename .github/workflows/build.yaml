@@ -8,7 +8,7 @@ jobs:
   build:
     strategy:
       matrix:
-        tf_version: ["main", "v3.75.1"]
+        tf_version: ["4.8.0", "3.75.1"]
     runs-on: 'ubuntu-latest'
     container: python:3
     steps:
@@ -34,7 +34,7 @@ jobs:
     container: golang:latest
     strategy:
       matrix:
-        tf_version: ["main", "v3.75.1"]
+        tf_version: ["4.8.0", "3.75.1"]
     needs: build
     steps:
 

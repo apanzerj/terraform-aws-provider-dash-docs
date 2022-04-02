@@ -1,5 +1,5 @@
-wget https://github.com/hashicorp/terraform-provider-aws/archive/refs/heads/$1.zip
-unzip $1.zip
+wget https://github.com/hashicorp/terraform-provider-aws/archive/refs/tags/v$1.zip
+unzip v$1.zip
 
 cp -r terraform-provider-aws-$1/website/docs/r ./
 cp -r terraform-provider-aws-$1/website/docs/d ./
