@@ -43,9 +43,10 @@ jobs:
         tar -xvf dash.tar
         cd dash
         dashing build tf
+        cd ..
         tar -zcvf tf.docset.tar tf.docset
 
-     - name: Release
-       uses: softprops/action-gh-release@v1
-       with:
-         files: tf.docset.tar
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: tf.docset.tar
