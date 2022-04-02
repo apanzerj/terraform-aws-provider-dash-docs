@@ -3,6 +3,7 @@ unzip main.zip
 
 cp -r terraform-provider-aws-main/website/docs/r ./
 cp -r terraform-provider-aws-main/website/docs/d ./
+cp -r terraform-provider-aws-main/website/docs/index.html.markdown ./
 
 echo "Creating resources.html.markdown"
 cat r/*.markdown > resources.html.markdown
@@ -31,7 +32,6 @@ sed -i'asdf' 's/\/github-markdown-css/github-markdown-css/g' index.html
 
 rm data_sources.html.markdown
 rm resources.html.markdown
-
 
 mkdir dash
 mv *.html dash/
