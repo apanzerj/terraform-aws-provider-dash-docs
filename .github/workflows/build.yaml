@@ -52,10 +52,10 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: dash_docset
-        path: ./tf.docset.tar
+        path: ./dash/tf.docset.tar
 
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
-        files: tf.docset.tar
-        tag_name: v2
+        files: ./dash/tf.docset.tar
+        tag_name: v3
