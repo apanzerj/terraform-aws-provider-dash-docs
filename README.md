@@ -10,3 +10,5 @@ Head over to releases. Download the tar file. Untar it. Open it.
 
 1. ~Set this up for multiple versions of aws provider~ Done! 3.x and 4.x now supported
 2. Clean up the search index (see issue)
+3. Add a better icon
+4. Grouping by subcategory
