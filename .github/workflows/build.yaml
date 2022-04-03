@@ -6,6 +6,9 @@ on:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        tf_version: ["4.8.0", "3.75.1"]
     runs-on: 'ubuntu-latest'
     container: python:3
     steps:
@@ -13,20 +16,25 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Build
+      env:
+        TF: ${{ matrix.tf_version }}
       run: |
         pip install -r requirements.txt
-        ./run.sh
-        tar -zcvf dash.tar dash/
+        ./run.sh ${{ matrix.tf_version }}
+        tar -zcvf dash-$TF.tar dash-$TF/
 
     - name: Save HTML
       uses: actions/upload-artifact@v3
       with:
-        name: dash
-        path: ./dash.tar
+        name: dash-${{ matrix.tf_version }}
+        path: ./dash-${{ matrix.tf_version }}.tar
 
   compile:
     runs-on: 'ubuntu-latest'
     container: golang:latest
+    strategy:
+      matrix:
+        tf_version: ["4.8.0", "3.75.1"]
     needs: build
     steps:
 
@@ -36,17 +44,26 @@ jobs:
 
     - uses: actions/download-artifact@v3
       with:
-        name: dash
+        name: dash-${{ matrix.tf_version }}
 
     - name: compile
+      env:
+        TF: ${{ matrix.tf_version }}
       run: |
-        tar -xvf dash.tar
-        cd dash
+        tar -xvf dash-$TF.tar
+        cd dash-$TF
         dashing build tf
-        tar -zcvf tf.docset.tar ./tf.docset
+        tar -zcvf tf.$TF.docset.tar ./tf.docset
+
+    - name: Save docset
+      uses: actions/upload-artifact@v3
+      with:
+        name: tf.${{ matrix.tf_version }}.docset
+        path: ./dash-${{ matrix.tf_version }}/tf.${{ matrix.tf_version }}.docset.tar
 
     - name: Release
       uses: softprops/action-gh-release@v1
+      if: ${{ github.event.release.tag_name }}
       with:
-        files: ./dash/tf.docset.tar
+        files: ./dash-${{ matrix.tf_version }}/tf.${{matrix.tf_version}}.docset.tar
         tag_name: ${{ github.event.release.tag_name }}
