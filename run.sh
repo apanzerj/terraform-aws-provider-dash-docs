@@ -1,5 +1,5 @@
 wget https://github.com/hashicorp/terraform-provider-aws/archive/refs/tags/v$1.zip
-unzip v$1.zip
+unzip -qq v$1.zip
 
 cp -r terraform-provider-aws-$1/website/docs/r ./
 cp -r terraform-provider-aws-$1/website/docs/d ./
@@ -15,11 +15,11 @@ sed -i'asdf' 's/```hcl/```terraform/gI' data_sources.html.markdown
 sed -i'asdf' 's/```hcl/```terraform/gI' resources.html.markdown
 
 echo "Converting resources.html.markdown to html"
-python -m gh_md_to_html -o OFFLINE resources.html.markdown
+python -m gh_md_to_html -o OFFLINE -m false resources.html.markdown
 echo "Converting data_sources.html.markdown to html"
-python -m gh_md_to_html -o OFFLINE data_sources.html.markdown
+python -m gh_md_to_html -o OFFLINE -f false data_sources.html.markdown
 echo "Converting index.html.markdown to html"
-python -m gh_md_to_html -o OFFLINE index.html.markdown
+python -m gh_md_to_html -o OFFLINE -m false index.html.markdown
 
 mv data_sources.html.html data_sources.html
 mv resources.html.html resources.html

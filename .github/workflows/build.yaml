@@ -59,11 +59,11 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: tf.${{ matrix.tf_version }}.docset
-        path: ./dash/tf.${{ matrix.tf_version }}.docset.tar
+        path: ./dash-${{ matrix.tf_version }}/tf.${{ matrix.tf_version }}.docset.tar
 
     - name: Release
       uses: softprops/action-gh-release@v1
       if: ${{ github.event.release.tag_name }}
       with:
-        files: ./dash/tf.${{matrix.tf_version}}.docset.tar
+        files: ./dash-${{ matrix.tf_version }}/tf.${{matrix.tf_version}}.docset.tar
         tag_name: ${{ github.event.release.tag_name }}
